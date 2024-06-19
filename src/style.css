@@ -1,1 +1,21 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+body {
+  background-color: rgb(8, 98, 8);
+}
+
+#number {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-size: 90px;
+}
+
+span {
+  font-size: 80px;
+}
+
+#card {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 25px;
+  box-shadow: 2px 2px 3px rgb(0, 0, 0);
+}
