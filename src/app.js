@@ -31,6 +31,25 @@ let generateRandomNumber = () => {
   return numbers[indexNumbers];
 };
 
+let sizeRelation = 250 / 370;
+function updateHeightBasedOnWidth() {
+  let widthInput = document.getElementById("widthInput");
+  let heightInput = document.getElementById("heightInput");
+  let width = parseFloat(widthInput.value);
+  let height = width / sizeRelation;
+  heightInput.value = height.toFixed(2);
+  generateNewCard();
+}
+
+function updateWidthBasedOnHeight() {
+  let widthInput = document.getElementById("widthInput");
+  let heightInput = document.getElementById("heightInput");
+  let height = parseFloat(heightInput.value);
+  let width = height * sizeRelation;
+  widthInput.value = width.toFixed(2);
+  generateNewCard();
+}
+
 let generateNewCard = () => {
   let randomIcon = generateRandomIcon();
   let grabIcon = document.getElementsByClassName("icon");
@@ -51,7 +70,20 @@ let generateNewCard = () => {
   let card = document.getElementById("card");
   card.style.width = width + "px";
   card.style.height = height + "px";
+
+  let iconSize = calculateFontSize(width, height, 0.3);
+  let numberSize = calculateFontSize(width, height, 0.4);
+
+  for (let icon of grabIcon) {
+    icon.style.fontSize = iconSize + "px";
+  }
+  document.querySelector("#number").style.fontSize = numberSize + "px";
 };
+
+function calculateFontSize(width, height, ratio) {
+  let minDimension = Math.min(width, height);
+  return minDimension * ratio;
+}
 
 let startTimer = () => {
   setInterval(() => {
@@ -62,6 +94,13 @@ let startTimer = () => {
 window.onload = () => {
   generateNewCard();
   startTimer();
+
+  document
+    .getElementById("widthInput")
+    .addEventListener("input", updateHeightBasedOnWidth);
+  document
+    .getElementById("heightInput")
+    .addEventListener("input", updateWidthBasedOnHeight);
 };
 
 document
